@@ -1,0 +1,654 @@
+{
+  "HudParam": {
+    "damage_": {
+      "rangeNear_": [
+        100,
+        300,
+        350,
+        0
+      ],
+      "rangeFar_": [
+        100,
+        200,
+        250,
+        0
+      ],
+      "scaleNear_": [
+        1,
+        1
+      ],
+      "scaleFar_": [
+        1,
+        1
+      ],
+      "height_": 1,
+      "length_": 80,
+      "viewTime_": 1.5,
+      "space_": -12,
+      "healSpace_": -32,
+      "commonSize_": 1.0,
+      "criticalSize_": 1.0,
+      "playerSize_": 1.0,
+      "playerCriticalSize_": 1.0,
+      "spArtsLinkAttackSize_": 1.0,
+      "totalDamageSize_": 1.0,
+      "normalAttackColor_": [
+        0.8235295,
+        0.9215687,
+        0.9411765,
+        0.5019608
+      ],
+      "spAttackColor_": [
+        0.9411765,
+        0.9215687,
+        0.7058824,
+        0.5019608
+      ]
+    },
+    "emHpGauge_": {
+      "ranges_": [
+        {
+          "Element": 15
+        },
+        {
+          "Element": 30
+        },
+        {
+          "Element": 45
+        }
+      ],
+      "angles_": [
+        {
+          "Element": 30
+        },
+        {
+          "Element": 60
+        }
+      ],
+      "displayMax_": 10
+    },
+    "classLevel_": {
+      "offset_": [
+        110,
+        -160
+      ],
+      "displayTime_": 1.5
+    },
+    "bloomTalk_": {
+      "charDispSecByLanguage_": [
+        {
+          "Element": 0.3
+        },
+        {
+          "Element": 0.08
+        },
+        {
+          "Element": 0.08
+        },
+        {
+          "Element": 0.08
+        },
+        {
+          "Element": 0.08
+        },
+        {
+          "Element": 0.08
+        },
+        {
+          "Element": 0.08
+        },
+        {
+          "Element": 0.3
+        },
+        {
+          "Element": 0.3
+        },
+        {
+          "Element": 0.3
+        }
+      ],
+      "offset_": [
+        30,
+        30
+      ],
+      "displayTime_": 4,
+      "displayTimeMin_": 2,
+      "correction_": [
+        30,
+        25
+      ],
+      "debugDrawBB_": false,
+      "closeCameraDist_": 1,
+      "farCameraDist_": 5,
+      "maxSlide_": 200
+    },
+    "mission_": {
+      "warnTime_": 60,
+      "addTimeDispDuration_": 2,
+      "newConditionWaitTime_": 0,
+      "defenseHpTransitionTime_": 0.25,
+      "defenseHpTransitionDelay_": 0.25,
+      "defenseHpWarnRate_": 0.3,
+      "defenseHpShowTime_": 1.5,
+      "defenseHpAlwaysShowDist_": 20,
+      "defenseHpUpdateShowDist_": 35,
+      "defenseHpHeadUpOffset_": 3.2
+    },
+    "message_": {
+      "interval_": 0.08,
+      "newlineWait_": 0.5,
+      "completeWait_": 1.1
+    },
+    "message_fate_envo_": {
+      "interval_": 0.044,
+      "newlineWait_": 0.5,
+      "completeWait_": 1.1
+    },
+    "roseGauge_": {
+      "heightOffset_": 1.6,
+      "delayTime_": 1.5
+    },
+    "exChr02_": {
+      "offset_": [
+        0,
+        0
+      ],
+      "limitMin_": [
+        -128,
+        0
+      ],
+      "limitMax_": [
+        64,
+        0
+      ],
+      "displayTime_": 0.1,
+      "holdAbilityGuideOffset_": [
+        -200,
+        200
+      ],
+      "continuouslyAbilityGuideOffset_": [
+        -300,
+        300
+      ]
+    },
+    "rackamGauge_": {
+      "offset_": [
+        360,
+        -480
+      ],
+      "limitMin_": [
+        -128,
+        0
+      ],
+      "limitMax_": [
+        64,
+        0
+      ],
+      "displayTime_": 1,
+      "holdAbilityGuideOffset_": [
+        -200,
+        200
+      ]
+    },
+    "exChr04_": {
+      "offset_": [
+        0,
+        0
+      ],
+      "limitMin_": [
+        -32,
+        0
+      ],
+      "limitMax_": [
+        0,
+        0
+      ],
+      "displayTime_": 0.2,
+      "chargeZeroDispTime_": 2,
+      "chargeAbilityGuideOffset_": [
+        -200,
+        200
+      ]
+    },
+    "exChr05_": {
+      "offset_": [
+        0,
+        0
+      ],
+      "limitMin_": [
+        0,
+        0
+      ],
+      "limitMax_": [
+        0,
+        0
+      ],
+      "displayTime_": 0,
+      "holdAbilityGuideOffset_": [
+        500,
+        500
+      ],
+      "chargeAbilityGuideOffset_": [
+        800,
+        1200
+      ]
+    },
+    "exChr07_": {
+      "offset_": [
+        0,
+        0
+      ],
+      "limitMin_": [
+        0,
+        0
+      ],
+      "limitMax_": [
+        0,
+        0
+      ],
+      "displayTime_": 0
+    },
+    "exChr08_": {
+      "offset_": [
+        0,
+        0
+      ],
+      "limitMin_": [
+        0,
+        0
+      ],
+      "limitMax_": [
+        0,
+        0
+      ],
+      "displayTime_": 0,
+      "holdAbilityGuideOffset_": [
+        -300,
+        200
+      ],
+      "continuouslyAbilityGuideOffset_": [
+        -550,
+        300
+      ]
+    },
+    "exChr09_": {
+      "offset_": [
+        450,
+        -450
+      ],
+      "limitMin_": [
+        -128,
+        0
+      ],
+      "limitMax_": [
+        64,
+        0
+      ],
+      "displayTime_": 1,
+      "holdAbilityGuideOffset_": [
+        -200,
+        200
+      ]
+    },
+    "exChr12_": {
+      "offset_": [
+        0,
+        0
+      ],
+      "limitMin_": [
+        0,
+        0
+      ],
+      "limitMax_": [
+        0,
+        0
+      ],
+      "displayTime_": 0,
+      "mashAbilityGuideOffset_": [
+        -200,
+        100
+      ]
+    },
+    "exChr13_": {
+      "offset_": [
+        360,
+        -480
+      ],
+      "limitMin_": [
+        -128,
+        0
+      ],
+      "limitMax_": [
+        64,
+        0
+      ],
+      "displayTime_": 1.5,
+      "holdAbilityGuideOffset_": [
+        -200,
+        100
+      ]
+    },
+    "exChr14_": {
+      "offset_": [
+        300,
+        -480
+      ],
+      "limitMin_": [
+        -256,
+        0
+      ],
+      "limitMax_": [
+        64,
+        0
+      ],
+      "displayTime_": 1,
+      "chargeAbilityGuideOffset_": [
+        -300,
+        200
+      ]
+    },
+    "exChr15_": {
+      "offset3D_": [
+        0,
+        -1.1,
+        0
+      ],
+      "rootPosition_": [
+        400,
+        -600
+      ],
+      "followLimitRect_": [
+        {
+          "Element": -100
+        },
+        {
+          "Element": 100
+        },
+        {
+          "Element": 100
+        },
+        {
+          "Element": -100
+        }
+      ],
+      "followSec_": 5,
+      "displayTime_": 0.3
+    },
+    "exChr16_": {
+      "offset_": [
+        0,
+        0
+      ],
+      "limitMin_": [
+        0,
+        0
+      ],
+      "limitMax_": [
+        0,
+        0
+      ],
+      "displayTime_": 0,
+      "continuouslyAbilityGuideOffset_": [
+        -350,
+        300
+      ]
+    },
+    "exChr17_": {
+      "offset_": [
+        360,
+        -480
+      ],
+      "limitMin_": [
+        -128,
+        0
+      ],
+      "limitMax_": [
+        64,
+        0
+      ],
+      "displayTime_": 0.1,
+      "holdAbilityGuideOffset_": [
+        -300,
+        300
+      ],
+      "continuouslyAbilityGuideOffset_": [
+        -500,
+        300
+      ]
+    },
+    "exChr18_": {
+      "offset_": [
+        0,
+        0
+      ],
+      "limitMin_": [
+        0,
+        0
+      ],
+      "limitMax_": [
+        0,
+        0
+      ],
+      "displayTime_": 0,
+      "continuouslyAbilityGuideOffset_": [
+        -300,
+        600
+      ]
+    },
+    "exChr19_": {
+      "offset_": [
+        0,
+        0
+      ],
+      "limitMin_": [
+        -128,
+        0
+      ],
+      "limitMax_": [
+        64,
+        0
+      ],
+      "displayTime_": 0.1,
+      "holdAbilityGuideOffset_": [
+        -200,
+        200
+      ]
+    },
+    "exChr21_": {
+      "offset_": [
+        450,
+        -450
+      ],
+      "limitMin_": [
+        -128,
+        0
+      ],
+      "limitMax_": [
+        64,
+        0
+      ],
+      "displayTime_": 1
+    },
+    "exChr22_": {
+      "offset_": [
+        450,
+        -450
+      ],
+      "limitMin_": [
+        -128,
+        0
+      ],
+      "limitMax_": [
+        64,
+        0
+      ],
+      "displayTime_": 1,
+      "outDelayFrames_": 30
+    },
+    "exChr23_": {
+      "offset_": [
+        360,
+        -480
+      ],
+      "limitMin_": [
+        -128,
+        0
+      ],
+      "limitMax_": [
+        -64,
+        0
+      ],
+      "displayTime_": 0.1,
+      "holdAbilityGuideOffset_": [
+        -200,
+        200
+      ],
+      "aimModeGuagePosition_": [
+        0,
+        -430
+      ]
+    },
+    "hud_": {
+      "changeWaitTime_": 1,
+      "abilityGuideInterpolateFrame_": 7
+    },
+    "challengeMission_": {
+      "iconHeightOffset_": 0,
+      "maxSizeDistance_": 0,
+      "minSizeDistance_": 25,
+      "maxSize_": 1.3,
+      "minSize_": 0.65,
+      "limitDispDistance_": 25
+    },
+    "headup_": {
+      "calc3D_": true,
+      "offsetExp_": [
+        0,
+        0
+      ],
+      "addExpInterval_": 0.2,
+      "offsetLevelUp_": [
+        0,
+        0
+      ],
+      "offsetBuff_": [
+        0,
+        0
+      ],
+      "intervalBuff_": 0.5,
+      "delayBuff_": 0,
+      "offsetAilment_": [
+        0,
+        0
+      ],
+      "offsetPlName_": [
+        0,
+        0
+      ],
+      "offsetLimitBonusUp_": [
+        0,
+        20
+      ],
+      "offsetSecondaryLimitBonusUp_": [
+        0,
+        110
+      ],
+      "offsetCommunication_": [
+        0,
+        30
+      ],
+      "offsetCommunicationBadgeDisp_": [
+        0,
+        100
+      ],
+      "offsetBuffEnemy_": 100,
+      "limitDistanceEnemy_": 10000
+    },
+    "missionCursor_": {
+      "maxDistance_": 10,
+      "minDistance_": 100,
+      "maxSize_": 1,
+      "minSize_": 0.75,
+      "angle_": 30
+    },
+    "rescueGuide_": {
+      "offset_": 1.7,
+      "maxDistance_": 3,
+      "minDistance_": 30,
+      "maxSize_": 1,
+      "minSize_": 0.5,
+      "playerSize_": 1.5
+    },
+    "communication_": {
+      "pressTime_": 0.2,
+      "neutralCoolTime_": 0.25
+    },
+    "staffRoll_": {
+      "nameSpacing_": [
+        {
+          "Element": 50
+        },
+        {
+          "Element": 100
+        }
+      ],
+      "middleItemSpacing_": [
+        {
+          "Element": 200
+        },
+        {
+          "Element": 100
+        }
+      ],
+      "positionSpacing_": [
+        {
+          "Element": 100
+        },
+        {
+          "Element": 150
+        }
+      ],
+      "logoSpacing_": [
+        {
+          "Element": 300
+        },
+        {
+          "Element": 300
+        }
+      ],
+      "bgmTitleBlockSpacing_": [
+        {
+          "Element": 0
+        },
+        {
+          "Element": 100
+        }
+      ],
+      "bgmPosOffset_": [
+        {
+          "Element": 300
+        },
+        {
+          "Element": 0
+        }
+      ],
+      "nameRangeOffset_": 200,
+      "middleItemRangeOffset_": 200,
+      "positionRangeOffset_": 200,
+      "logoRangeOffset_": 300,
+      "achievementTime_": 5500,
+      "highSpeedUnlockTime_": 15000
+    },
+    "information_": {
+      "dispDelayTime_": 0.5
+    },
+    "overlayMap_": {
+      "standardMapId_": 3768213170,
+      "hookRange_": [
+        1664,
+        724
+      ],
+      "pressTime_": 0.2
+    }
+  }
+}
