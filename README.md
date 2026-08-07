@@ -1,4 +1,100 @@
-# GBFR 伤害字体 Mod Maker
+# GBFR Damage Font Mod Maker
+
+A no-code, visual tool for making damage-number / symbol font mods for *Granblue Fantasy: Relink*. Single-file EXE, double-click to run, with an English / Chinese UI.
+
+> Current version: **v37** (final)
+
+---
+
+## ✨ Features
+
+- **Generate colored PNGs from TTF**: pick a `.ttf` / `.otf` font, customize color / opacity / bold / italic per group, and one-click generate colored digits that are imported and swapped in automatically.
+- **Multiple replacement modes**: manual single-image import, batch import from a folder (filename = element name, auto-matched), or batch-replace an entire group by index (00–12).
+- **Damage-number size control**: edit the scale factor in `hud_param.json`, range 0–20, where 1.0 = native size and 0 = hidden.
+- **Collapsible grouped table** + live native-ratio preview.
+- **Bilingual UI** (English / Chinese), switchable with one click at the top-right.
+- **One-click export**: each of columns ①②③ has an "Export…" button — column 1 exports the element-name Excel, column 2 the coordinate-table Excel, column 3 the native-PNG folder; the toolbar "Export all columns…" exports a single Excel with thumbnails (element name / coordinates / size / native image / action / replacement image).
+- Click "Generate Mod" to get a zip (output to `./mod_output` by default), then load it with Reloaded-II to apply.
+
+---
+
+## 📥 Download
+
+- **Prebuilt EXE (recommended for most users)**: [`gbfr_mod_maker_v37.zip`](gbfr_mod_maker_v37.zip) at the repo root. Unzip to get `gbfr_mod_maker_v37.exe`, double-click to run — no Python needed.
+- To use "Generate PNG from TTF" out of the box, drop any `.ttf` next to the exe and rename it to `LiXuKeShuFa-1.ttf` (or click "Browse" in the app to pick a font).
+
+> For a nicer download button, check the repo **Releases** page (the same zip is usually attached there).
+
+---
+
+## 🚀 Quick Start
+
+1. (Optional) Click "Generate PNG from TTF" to make colored font PNGs; or import replacement images manually / in batch.
+2. (Optional) Click "Damage-number size control" to adjust the scale.
+3. Click "Generate Mod" to produce a zip (output to `./mod_output` by default).
+4. Load the generated mod with Reloaded-II + `gbfrelink.utility.manager`, then launch the game.
+
+> ⚠️ Note the two different output folders: "Mod output directory" (`./mod_output`, the final archive) vs "Font PNG output directory" (`./font_output`, the colored PNGs from TTF). They are not the same.
+
+---
+
+## 🧩 Prerequisites (to run mods)
+
+- [Reloaded-II](https://github.com/Reloaded-Project/Reloaded-II)
+- [gbfrelink.utility.manager](https://github.com/Nenkai23/GBFR-Utils) (Nenkai)
+
+---
+
+## 🛠️ Build from Source
+
+Requires Python 3.10+ and these dependencies:
+
+```bash
+pip install pyinstaller pillow openpyxl
+```
+
+Build from inside the `src/` directory:
+
+```bash
+cd src
+pyinstaller --noconfirm --onefile ^
+  --add-data "resources;resources" ^
+  --collect-submodules=PIL --collect-submodules=openpyxl ^
+  --name gbfr_mod_maker_v37 gbfr_mod_maker.py
+```
+
+> On Windows the `--add-data` separator is `;` (as shown). On macOS / Linux use `:`.
+> Or simply run `pyinstaller gbfr_mod_maker_v37.spec` (also from inside `src/`).
+
+Native assets (atlases / `sprites.json` / `hud_param.json` template / `texconv.exe`) live in `src/resources/`.
+
+---
+
+## 📚 Reference Docs
+
+The `docs/` folder contains analysis notes from the project's development, for those who want to dig deeper:
+
+- `docs/GBFR_伤害数字与Buff图标_分析报告.md` — structure analysis of damage numbers and buff icons in the game's assets.
+- `docs/GBFR_修改与封包指南.md` — how to modify and repackage results back into the game.
+- `docs/GBFR伤害字体Mod演示文案.txt` — subtitle script for screen-recording / video demos.
+
+---
+
+## 🙏 Credits / Asset Licensing
+
+- Native assets and original ideas: **bilibili @Dangoooooo** (QQ: 1041271418).
+- `src/resources/texconv.exe` comes from Microsoft's **DirectXTex** (MIT licensed).
+- The game's native atlases / `sprites.json` / `hud_param.json` are extracted from *Granblue Fantasy: Relink* game files; copyright belongs to **Cygames**. This repository shares them only as part of a modding tool; these assets are not separately licensed. Please comply with the game's EULA and applicable law.
+
+---
+
+## 📄 License
+
+The tool's source code is released under the **MIT License** — see [LICENSE](LICENSE).
+
+---
+
+# GBFR 伤害字体 Mod Maker（中文）
 
 傻瓜式制作《碧蓝幻想 Relink》（Granblue Fantasy: Relink）伤害数字 / 符号字体 mod 的可视化工具。单文件 exe，双击即用，支持中英文界面。
 
