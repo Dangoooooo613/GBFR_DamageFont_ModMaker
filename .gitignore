@@ -17,5 +17,5 @@ Thumbs.db
 .DS_Store
 
 # ---- 暂时保留的发布文件（不要忽略）----
-!gbfr_mod_maker_v37.zip
+!gbfr_mod_maker_v40.zip
 !src/resources/texconv.exe

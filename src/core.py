@@ -277,13 +277,13 @@ DEFAULT_SIZE_SCALE = {
     "spArtsLinkAttackSize_": 1.0,
     "height_": 1.0,
     "length_": 80.0,
-    "viewTime_": 1.5,
+    "viewTime_": 0.2,
     "space_": -12.0,
     "healSpace_": -32.0,
-    "commonSize_": 1.0,
-    "criticalSize_": 1.0,
+    "commonSize_": 0.42,
+    "criticalSize_": 0.33,
     "playerSize_": 1.0,
-    "playerCriticalSize_": 1.0,
+    "playerCriticalSize_": 0.8,
 }
 
 # 队友伤害颜色 (damage_ 段 normalAttackColor_ / spAttackColor_) 原生基准

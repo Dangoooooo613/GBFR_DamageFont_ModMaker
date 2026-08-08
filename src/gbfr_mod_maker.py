@@ -69,13 +69,13 @@ DEFAULT_SIZE_SCALE = {
     "spArtsLinkAttackSize_": 1.0,
     "height_": 1.0,
     "length_": 80.0,
-    "viewTime_": 1.5,
+    "viewTime_": 0.2,
     "space_": -12.0,
     "healSpace_": -32.0,
-    "commonSize_": 1.0,
-    "criticalSize_": 1.0,
+    "commonSize_": 0.42,
+    "criticalSize_": 0.33,
     "playerSize_": 1.0,
-    "playerCriticalSize_": 1.0,
+    "playerCriticalSize_": 0.8,
 }
 
 # 队友伤害颜色 (damage_ 段) 原生基准; 工具内用 0-255 RGBA, 写入时 /255
@@ -108,7 +108,7 @@ LANG = "zh"   # "zh"(默认) 或 "en"
 
 I18N = {
     "zh": {
-        "app_title": "GBFR 伤害字体 Mod 编辑器  v37   UP: bilibili / Dangoooooo  QQ:1041271418",
+        "app_title": "GBFR 伤害字体 Mod 编辑器  v40   UP: bilibili / Dangoooooo  QQ:1041271418",
         "gen_mod": "▶ 生成 Mod",
         "ttf_tab": "用字体生成png",
         "batch_replace": "用png图片批量替换全组别的个别元素",
@@ -161,7 +161,7 @@ I18N = {
         "sz_criticalsize": "队友暴击大小",
         "sz_playersize": "玩家普通大小",
         "sz_playercriticalsize": "玩家暴击大小",
-        "sz_viewtime_hint": "秒; 推荐1.5",
+        "sz_viewtime_hint": "秒; 推荐0.2",
         "sz_healspace_hint": "推荐 -40~40",
         "sz_commonsize_hint": "推荐 0.2~1",
         "sz_criticalsize_hint": "推荐 0.2~1",
@@ -219,7 +219,7 @@ I18N = {
         "br_scale_mode": "占比 %d%%",
         "br_none": "无",
         "about_title": "关于",
-        "about_body": "GBFR 伤害字体 Mod 编辑器  v37\n\n傻瓜式制作 GBFR 伤害数字/符号字体 mod。\n①名 ②坐标 ③原生真实比例图 ④保留/屏蔽/替换 ⑤导入+占比+预览。\n按后缀组别折叠分组; 字体(TTF/OTF)生成支持每组自定义颜色、加粗、斜体。\n支持批量导入文件夹; 支持按编号批量替换全组别元素。\n新增: 伤害大小/浮动/队友伤害颜色 (hud_param.json → damage_): 属性克制系数 spArtsLinkAttackSize_ 0.3~2(0=关闭)、垂直位置 height_(0=轴线过屏中心) 推荐-2~2、水平位置 length_(0=轴线过屏中心) 推荐-200~200、字符间距 space_ 推荐-40~40、治愈间距 healSpace_ 推荐-40~40、显示时间 viewTime_ 推荐1.5s、队友大小 commonSize_/criticalSize_ 推荐0.2~1、玩家大小 playerSize_/playerCriticalSize_ 推荐0.3~1.2、队友颜色 normalAttackColor_/spAttackColor_ (RGBA 0-255)、浮动系数 alpha (乘以原生值, 1.0=原生, 越大越散)。\n\n依赖 Reloaded-II + gbfrelink.utility.manager。",
+        "about_body": "GBFR 伤害字体 Mod 编辑器  v40\n\n傻瓜式制作 GBFR 伤害数字/符号字体 mod。\n①名 ②坐标 ③原生真实比例图 ④保留/屏蔽/替换 ⑤导入+占比+预览。\n按后缀组别折叠分组; 字体(TTF/OTF)生成支持每组自定义颜色、加粗、斜体。\n支持批量导入文件夹; 支持按编号批量替换全组别元素。\n新增: 伤害大小/浮动/队友伤害颜色 (hud_param.json → damage_): 属性克制系数 spArtsLinkAttackSize_ 0.3~2(0=关闭)、垂直位置 height_(0=轴线过屏中心) 推荐-2~2、水平位置 length_(0=轴线过屏中心) 推荐-200~200、字符间距 space_ 推荐-40~40、治愈间距 healSpace_ 推荐-40~40、显示时间 viewTime_ 推荐0.2s、队友大小 commonSize_/criticalSize_ 推荐0.2~1、玩家大小 playerSize_/playerCriticalSize_ 推荐0.3~1.2、队友颜色 normalAttackColor_/spAttackColor_ (RGBA 0-255)、浮动系数 alpha (乘以原生值, 1.0=原生, 越大越散)。\n\n依赖 Reloaded-II + gbfrelink.utility.manager。",
         "build_out_missing": "错误",
         "build_out_missing_msg": "请先设置输出目录",
         "confirm_title": "确认",
@@ -258,7 +258,7 @@ I18N = {
         "tutorial": "教程",
     },
     "en": {
-        "app_title": "GBFR Damage Font Mod Editor  v37   UP: bilibili / Dangoooooo  QQ:1041271418",
+        "app_title": "GBFR Damage Font Mod Editor  v40   UP: bilibili / Dangoooooo  QQ:1041271418",
         "gen_mod": "▶ Build Mod",
         "ttf_tab": "Generate PNG from Font",
         "batch_replace": "Batch Replace Elements (by code 00-12)",
@@ -311,7 +311,7 @@ I18N = {
         "sz_criticalsize": "Ally Crit Size",
         "sz_playersize": "Player Normal Size",
         "sz_playercriticalsize": "Player Crit Size",
-        "sz_viewtime_hint": "sec; recommend 1.5",
+        "sz_viewtime_hint": "sec; recommend 0.2",
         "sz_healspace_hint": "recommend -40~40",
         "sz_commonsize_hint": "recommend 0.2~1",
         "sz_criticalsize_hint": "recommend 0.2~1",
@@ -369,7 +369,7 @@ I18N = {
         "br_scale_mode": "Scale %d%%",
         "br_none": "none",
         "about_title": "About",
-        "about_body": "GBFR Damage Font Mod Editor  v37\n\nEasily create GBFR damage number / symbol font mods.\nCols: Name | Coord | Native (real ratio) | Keep/Block/Replace | Import+Scale+Preview.\nCollapsible groups by suffix; Font (TTF/OTF) supports per-group color, bold, italic.\nBatch folder import; batch replace all groups by code.\nNew: Damage Size / Float / Teammate Color control (hud_param.json → damage_): ElemAdv Scale spArtsLinkAttackSize_ 0.3~2(0=off), Vertical height_(0=axis thru center) recommend -2~2, Horizontal length_(0=axis thru center) recommend -200~200, Spacing space_ recommend -40~40, Heal Spacing healSpace_ recommend -40~40, Show viewTime_ recommend 1.5s, Ally sizes commonSize_/criticalSize_ recommend 0.2~1, Player sizes playerSize_/playerCriticalSize_ recommend 0.3~1.2, teammate color normalAttackColor_/spAttackColor_ (RGBA 0-255), float alpha (multiplier on native values, 1.0=native, larger=more spread).\n\nRequires Reloaded-II + gbfrelink.utility.manager.",
+        "about_body": "GBFR Damage Font Mod Editor  v40\n\nEasily create GBFR damage number / symbol font mods.\nCols: Name | Coord | Native (real ratio) | Keep/Block/Replace | Import+Scale+Preview.\nCollapsible groups by suffix; Font (TTF/OTF) supports per-group color, bold, italic.\nBatch folder import; batch replace all groups by code.\nNew: Damage Size / Float / Teammate Color control (hud_param.json → damage_): ElemAdv Scale spArtsLinkAttackSize_ 0.3~2(0=off), Vertical height_(0=axis thru center) recommend -2~2, Horizontal length_(0=axis thru center) recommend -200~200, Spacing space_ recommend -40~40, Heal Spacing healSpace_ recommend -40~40, Show viewTime_ recommend 0.2s, Ally sizes commonSize_/criticalSize_ recommend 0.2~1, Player sizes playerSize_/playerCriticalSize_ recommend 0.3~1.2, teammate color normalAttackColor_/spAttackColor_ (RGBA 0-255), float alpha (multiplier on native values, 1.0=native, larger=more spread).\n\nRequires Reloaded-II + gbfrelink.utility.manager.",
         "build_out_missing": "Error",
         "build_out_missing_msg": "Please set the output directory first",
         "confirm_title": "Confirm",
@@ -436,7 +436,7 @@ TUTORIAL_TEXT = {
 "\n"
         "三、调整数字外观/位置/队友颜色(可选)\n"
         "· 点“伤害大小/浮动/队友伤害颜色” -> 多个分组输入框：\n"
-        "   [位置与时间] height_: 伤害字幕区总体垂直位置，0时水平轴线过屏幕中心 推荐-2~2；length_: 总体水平位置，0时垂直轴线过屏幕中心 推荐-200~200；viewTime_: 显示时间(秒) 推荐1.5\n"
+        "   [位置与时间] height_: 伤害字幕区总体垂直位置，0时水平轴线过屏幕中心 推荐-2~2；length_: 总体水平位置，0时垂直轴线过屏幕中心 推荐-200~200；viewTime_: 显示时间(秒) 推荐0.2\n"
         "   [间距] space_: 每串伤害数字内部字符拥挤程度 推荐-40~40；healSpace_: 每串治愈数字内部字符拥挤程度 推荐-40~40\n"
         "   [大小] commonSize_(未暴击队友) 推荐0.2~1；criticalSize_(暴击队友) 推荐0.2~1；playerSize_(未暴击玩家) 推荐0.3~1.2；playerCriticalSize_(暴击玩家) 推荐0.3~1.2；spArtsLinkAttackSize_(属性克制系数) 0.3~2(0=关闭,1=原生)\n"
         "   [浮动] 浮动系数 alpha：一个数控制 rangeNear_/rangeFar_ 全部 8 个原生值的整体缩放；1.0=原生不变，越大数字分布越散，越小越紧凑；建议 0.5~3.0\n"
@@ -489,7 +489,7 @@ TUTORIAL_TEXT = {
 "\n"
 "3. Number appearance / position / teammate color (optional)\n"
 "· Click 'Damage Size / Float / Teammate Color' -> grouped input boxes:\n"
-"   [Position & Time] height_: overall vertical pos of damage area, 0=horizontal axis through screen center recommend -2~2; length_: overall horizontal pos, 0=vertical axis through screen center recommend -200~200; viewTime_: display time(sec) recommend 1.5\n"
+"   [Position & Time] height_: overall vertical pos of damage area, 0=horizontal axis through screen center recommend -2~2; length_: overall horizontal pos, 0=vertical axis through screen center recommend -200~200; viewTime_: display time(sec) recommend 0.2\n"
 "   [Spacing] space_: character crowding per damage string recommend -40~40; healSpace_: character crowding per heal string recommend -40~40\n"
 "   [Size] commonSize_(non-crit ally) recommend 0.2~1; criticalSize_(crit ally) recommend 0.2~1; playerSize_(non-crit you) recommend 0.3~1.2; playerCriticalSize_(crit you) recommend 0.3~1.2; spArtsLinkAttackSize_(elemental advantage scale) 0.3~2(0=off,1=native)\n"
         "   [Float] Spread factor alpha: one value scales all 8 native values of rangeNear_/rangeFar_; 1.0=native, larger=more spread, smaller=more compact; suggest 0.5~3.0\n"

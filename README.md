@@ -2,7 +2,9 @@
 
 A no-code, visual tool for making damage-number / symbol font mods for *Granblue Fantasy: Relink*. Single-file EXE, double-click to run, with an English / Chinese UI.
 
-> Current version: **v37** (final)
+> Current version: **v40** (final)
+
+> **v40 changelog**: Fixed indicator misalignment for characters with functional indicators (exChr10_/11_/24~28_, endlessIcon_, skillBoard_, etc.). Replaced `hud_param.json` template with the full 52-block native template (previously only 35 blocks, causing 17 blocks to go missing during Reloaded-II's whole-file replacement). Updated all DEFAULT_SIZE_SCALE values to match current native game values (`viewTime_` 1.5→0.2, `commonSize_` 1.0→0.42, `criticalSize_` 1.0→0.33, `playerCriticalSize_` 1.0→0.8). Added numpy dependency.
 
 ---
 
@@ -20,7 +22,7 @@ A no-code, visual tool for making damage-number / symbol font mods for *Granblue
 
 ## 📥 Download
 
-- **Prebuilt EXE (recommended for most users)**: [`gbfr_mod_maker_v37.zip`](gbfr_mod_maker_v37.zip) at the repo root. Unzip to get `gbfr_mod_maker_v37.exe`, double-click to run — no Python needed.
+- **Prebuilt EXE (recommended for most users)**: [`gbfr_mod_maker_v40.zip`](gbfr_mod_maker_v40.zip) at the repo root. Unzip to get `gbfr_mod_maker_v40.exe`, double-click to run — no Python needed.
 - To use "Generate PNG from TTF" out of the box, drop any `.ttf` next to the exe and rename it to `LiXuKeShuFa-1.ttf` (or click "Browse" in the app to pick a font).
 
 > For a nicer download button, check the repo **Releases** page (the same zip is usually attached there).
@@ -50,7 +52,7 @@ A no-code, visual tool for making damage-number / symbol font mods for *Granblue
 Requires Python 3.10+ and these dependencies:
 
 ```bash
-pip install pyinstaller pillow openpyxl
+pip install pyinstaller pillow openpyxl numpy
 ```
 
 Build from inside the `src/` directory:
@@ -60,11 +62,12 @@ cd src
 pyinstaller --noconfirm --onefile ^
   --add-data "resources;resources" ^
   --collect-submodules=PIL --collect-submodules=openpyxl ^
-  --name gbfr_mod_maker_v37 gbfr_mod_maker.py
+  --hidden-import numpy --collect-submodules=numpy ^
+  --name gbfr_mod_maker_v40 gbfr_mod_maker.py
 ```
 
 > On Windows the `--add-data` separator is `;` (as shown). On macOS / Linux use `:`.
-> Or simply run `pyinstaller gbfr_mod_maker_v37.spec` (also from inside `src/`).
+> Or simply run `pyinstaller gbfr_mod_maker_v40.spec` (also from inside `src/`).
 
 Native assets (atlases / `sprites.json` / `hud_param.json` template / `texconv.exe`) live in `src/resources/`.
 
@@ -98,7 +101,9 @@ The tool's source code is released under the **MIT License** — see [LICENSE](L
 
 傻瓜式制作《碧蓝幻想 Relink》（Granblue Fantasy: Relink）伤害数字 / 符号字体 mod 的可视化工具。单文件 exe，双击即用，支持中英文界面。
 
-> 当前版本：**v37**（最终版）
+> 当前版本：**v40**（最终版）
+
+> **v40 更新日志**：修复带功能指示器的角色错位问题（exChr10_/11_/24~28_、endlessIcon_、skillBoard_ 等）。将 `hud_param.json` 模板替换为完整 52 区块原生模板（此前仅 35 区块，导致 Reloaded-II 整文件替换时 17 个区块缺失）。更新所有 DEFAULT_SIZE_SCALE 值以匹配当前原生游戏值（`viewTime_` 1.5→0.2、`commonSize_` 1.0→0.42、`criticalSize_` 1.0→0.33、`playerCriticalSize_` 1.0→0.8）。新增 numpy 依赖。
 
 ---
 
@@ -116,7 +121,7 @@ The tool's source code is released under the **MIT License** — see [LICENSE](L
 
 ## 📥 下载
 
-- **成品 exe（推荐普通用户）**：仓库根目录的 [`gbfr_mod_maker_v37.zip`](gbfr_mod_maker_v37.zip)，解压即得 `gbfr_mod_maker_v37.exe`，双击即用，无需 Python 环境。
+- **成品 exe（推荐普通用户）**：仓库根目录的 [`gbfr_mod_maker_v40.zip`](gbfr_mod_maker_v40.zip)，解压即得 `gbfr_mod_maker_v40.exe`，双击即用，无需 Python 环境。
 - 若想「用 TTF 生成 PNG」开箱即用，把任意 `.ttf` 放到 exe 同目录并命名为 `LiXuKeShuFa-1.ttf`（或在软件里点「浏览」自行选择字体）。
 
 > 想让下载按钮更漂亮，也可以去仓库 **Releases** 页面下载（作者通常会把同一个 zip 挂到 Release 上）。
@@ -146,7 +151,7 @@ The tool's source code is released under the **MIT License** — see [LICENSE](L
 需要 Python 3.10+，并安装依赖：
 
 ```bash
-pip install pyinstaller pillow openpyxl
+pip install pyinstaller pillow openpyxl numpy
 ```
 
 进入 `src/` 目录后用打包命令构建：
@@ -156,11 +161,12 @@ cd src
 pyinstaller --noconfirm --onefile ^
   --add-data "resources;resources" ^
   --collect-submodules=PIL --collect-submodules=openpyxl ^
-  --name gbfr_mod_maker_v37 gbfr_mod_maker.py
+  --hidden-import numpy --collect-submodules=numpy ^
+  --name gbfr_mod_maker_v40 gbfr_mod_maker.py
 ```
 
 > Windows 上 `--add-data` 的分隔符是 `;`（如上）。macOS / Linux 请用 `:`。
-> 也可以直接 `pyinstaller gbfr_mod_maker_v37.spec`（同样在 `src/` 目录下运行）。
+> 也可以直接 `pyinstaller gbfr_mod_maker_v40.spec`（同样在 `src/` 目录下运行）。
 
 原生资源（图集 / `sprites.json` / `hud_param.json` 模板 / `texconv.exe`）位于 `src/resources/`。
 
