@@ -7,7 +7,9 @@ venv/
 
 # ---- 构建产物 ----
 build/
+build_v*/
 dist/
+dist_v*/
 
 # ---- 编辑器 / OS ----
 .vscode/
@@ -16,6 +18,8 @@ dist/
 Thumbs.db
 .DS_Store
 
-# ---- 暂时保留的发布文件（不要忽略）----
+# ---- 发布文件（只保留最新 v57 zip；v40 为历史已跟踪版本）----
+gbfr_mod_maker_v*.zip
 !gbfr_mod_maker_v40.zip
+!gbfr_mod_maker_v57.zip
 !src/resources/texconv.exe

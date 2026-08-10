@@ -1566,5 +1566,89 @@
    140
   ],
   "char": "+"
+ },
+ {
+  "name": "hud_nmbtl_effect16",
+  "group": "effect",
+  "x": 128,
+  "y": 1526,
+  "w": 456,
+  "h": 85,
+  "dominant": [
+   1,
+   106,
+   228
+  ],
+  "char": null
+ },
+ {
+  "name": "hud_nmbtl_effect17",
+  "group": "effect",
+  "x": 121,
+  "y": 1692,
+  "w": 475,
+  "h": 124,
+  "dominant": [
+   255,
+   255,
+   255
+  ],
+  "char": null
+ },
+ {
+  "name": "hud_nmbtl_effect18",
+  "group": "effect",
+  "x": 668,
+  "y": 1271,
+  "w": 65,
+  "h": 72,
+  "dominant": [
+   0,
+   36,
+   8
+  ],
+  "char": null
+ },
+ {
+  "name": "hud_nmbtl_effect_capline",
+  "group": "effect",
+  "x": 69,
+  "y": 1912,
+  "w": 591,
+  "h": 74,
+  "dominant": [
+   255,
+   255,
+   255
+  ],
+  "char": null
+ },
+ {
+  "name": "hud_nmbtl_effect_star4pt",
+  "group": "effect",
+  "x": 2500,
+  "y": 1590,
+  "w": 130,
+  "h": 124,
+  "dominant": [
+   255,
+   255,
+   255
+  ],
+  "char": null
+ },
+ {
+  "name": "hud_nmbtl_effect_darkglow",
+  "group": "effect",
+  "x": 731,
+  "y": 1719,
+  "w": 298,
+  "h": 329,
+  "dominant": [
+   0,
+   28,
+   8
+  ],
+  "char": null
  }
 ]

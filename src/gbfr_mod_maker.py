@@ -4,7 +4,7 @@
 GBFR 伤害字体 mod 编辑器 (tkinter, 单文件 GUI)
 
 功能:
-  - 列出全部 112 精灵(按后缀组别可折叠分组): ①元素名 ②坐标 ③原生图(真实 UV 比例)
+  - 列出全部 118 精灵(按后缀组别可折叠分组): ①元素名 ②坐标 ③原生图(真实 UV 比例)
   - ④每精灵 三选一: 保留 / 屏蔽 / 替换  (列头: 全部保留/屏蔽/替换)
   - ⑤每精灵: 导入 PNG + 占比(无上限) + 替换预览
               (列头: 批量导入文件夹 + 批量占比)
@@ -26,9 +26,9 @@ from openpyxl.drawing.image import Image as XLImage
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import core
 
-# 列宽 (①名缩窄 ②坐标缩窄 ⑤替换图加宽放预览+控件)
-COL_W = [150, 90, 150, 250, 300]
-COL_NAME, COL_COORD, COL_NATIVE, COL_ACTION, COL_REPLACE = range(5)
+# 列最小宽度 (grid minsize，窗口放大时 weight 列会拉伸)
+COL_W = [180, 90, 160, 200, 280, 280]
+COL_NAME, COL_COORD, COL_NATIVE, COL_ACTION, COL_REPLACE, COL_OVERLAY = range(6)
 NATIVE_MAX = (140, 92)
 PREVIEW_MAX = (140, 92)
 
@@ -108,7 +108,7 @@ LANG = "zh"   # "zh"(默认) 或 "en"
 
 I18N = {
     "zh": {
-        "app_title": "GBFR 伤害字体 Mod 编辑器  v40   UP: bilibili / Dangoooooo  QQ:1041271418",
+        "app_title": "GBFR 伤害字体 Mod 编辑器  v57   UP: bilibili / Dangoooooo  QQ:1041271418",
         "gen_mod": "▶ 生成 Mod",
         "ttf_tab": "用字体生成png",
         "batch_replace": "用png图片批量替换全组别的个别元素",
@@ -121,6 +121,7 @@ I18N = {
         "col_native": "③原生图 (真实比例)",
         "col_action": "④动作",
         "col_replace": "⑤替换图片",
+        "col_overlay": "⑥原生覆盖/染色",
         "all_keep": "全部保留",
         "all_block": "全部屏蔽",
         "all_replace": "全部替换",
@@ -145,7 +146,7 @@ I18N = {
         "ratio_lbl": "占比",
         "stretch_lbl": "铺满",
         "sz_win_title": "伤害大小 / 浮动 / 队友伤害颜色 (hud_param.json)",
-        "sz_desc": "伤害数字外观与队友颜色 (写入 mod 的 hud_param.json → damage_ 段)。仅 spArtsLinkAttackSize_ 实际改变数字大小，其佗控制位置/间距/时间；队友颜色用 RGBA(0-255)。回车或失焦应用，重置恢复原生基准。",
+        "sz_desc": "伤害数字外观与队友颜色 (写入 mod 的 hud_param.json → damage_ 段)。仅 spArtsLinkAttackSize_ 实际改变数字大小，其它控制位置/间距/时间；队友颜色用 RGBA(0-255)。回车或失焦应用，重置恢复原生基准。",
         "sz_size": "属性克制时变化系数",
         "sz_height": "垂直位置",
         "sz_length": "水平位置",
@@ -178,7 +179,7 @@ I18N = {
         "sz_sec_float": "浮动 (Spread)",
         "sz_range_alpha": "浮动系数 alpha",
         "sz_range_alpha_hint": "1.0=原生(不变); 越大数字分布越散, 越小越紧凑; 建议 0.5~3.0",
-        "col_pick": "选择 %s 颜色",
+        "col_pick": "选择颜色",
         "ttf_heading": "字体上色 / 样式设置",
         "ttf_file": "文件",
         "ttf_font": "字体文件:",
@@ -219,7 +220,7 @@ I18N = {
         "br_scale_mode": "占比 %d%%",
         "br_none": "无",
         "about_title": "关于",
-        "about_body": "GBFR 伤害字体 Mod 编辑器  v40\n\n傻瓜式制作 GBFR 伤害数字/符号字体 mod。\n①名 ②坐标 ③原生真实比例图 ④保留/屏蔽/替换 ⑤导入+占比+预览。\n按后缀组别折叠分组; 字体(TTF/OTF)生成支持每组自定义颜色、加粗、斜体。\n支持批量导入文件夹; 支持按编号批量替换全组别元素。\n新增: 伤害大小/浮动/队友伤害颜色 (hud_param.json → damage_): 属性克制系数 spArtsLinkAttackSize_ 0.3~2(0=关闭)、垂直位置 height_(0=轴线过屏中心) 推荐-2~2、水平位置 length_(0=轴线过屏中心) 推荐-200~200、字符间距 space_ 推荐-40~40、治愈间距 healSpace_ 推荐-40~40、显示时间 viewTime_ 推荐0.2s、队友大小 commonSize_/criticalSize_ 推荐0.2~1、玩家大小 playerSize_/playerCriticalSize_ 推荐0.3~1.2、队友颜色 normalAttackColor_/spAttackColor_ (RGBA 0-255)、浮动系数 alpha (乘以原生值, 1.0=原生, 越大越散)。\n\n依赖 Reloaded-II + gbfrelink.utility.manager。",
+        "about_body": "GBFR 伤害字体 Mod 编辑器  v57\n\n傻瓜式制作 GBFR 伤害数字/符号字体 mod。\n①名 ②坐标 ③原生真实比例图 ④保留/屏蔽/替换 ⑤导入+占比+预览 ⑥原生覆盖/染色。\n按后缀组别折叠分组; 字体(TTF/OTF)生成支持每组自定义颜色、加粗、斜体。\n支持批量导入文件夹; 支持按编号批量替换全组别元素。\n新增: 伤害大小/浮动/队友伤害颜色 (hud_param.json → damage_): 属性克制系数 spArtsLinkAttackSize_ 0.3~2(0=关闭)、垂直位置 height_(0=轴线过屏中心) 推荐-2~2、水平位置 length_(0=轴线过屏中心) 推荐-200~200、字符间距 space_ 推荐-40~40、治愈间距 healSpace_ 推荐-40~40、显示时间 viewTime_ 推荐0.2s、队友大小 commonSize_/criticalSize_ 推荐0.2~1、玩家大小 playerSize_/playerCriticalSize_ 推荐0.3~1.2、队友颜色 normalAttackColor_/spAttackColor_ (RGBA 0-255)、浮动系数 alpha (乘以原生值, 1.0=原生, 越大越散)。\n\n依赖 Reloaded-II + gbfrelink.utility.manager。",
         "build_out_missing": "错误",
         "build_out_missing_msg": "请先设置输出目录",
         "confirm_title": "确认",
@@ -254,11 +255,20 @@ I18N = {
         "png_export_fail": "PNG 导出失败 %s: %s",        "exp_pngs_done": "已导出 %d 张原生 PNG 到:\n%s",
         "exp_done": "已导出:\n%s",
         "log_import_cfg": "已导入配置: %s",
+        "overlay_all": "将原生图片全部覆盖到预览图…",
+        "overlay_one": "原生覆盖…",
+        "overlay_tint": "染色",
+        "overlay_alpha": "不透明度",
+        "overlay_tint_rgb": "R/G/B",
+        "overlay_tint_a": "A",
+        "overlay_tint_pick": "调色板",
+        "overlay_log": "原生覆盖: %s <- 原生图(已设为替换)",
+        "overlay_tint_log": "原生覆盖并染色: %s <- RGBA(%d,%d,%d,%d)",
         "lang_toggle": "EN",
         "tutorial": "教程",
     },
     "en": {
-        "app_title": "GBFR Damage Font Mod Editor  v40   UP: bilibili / Dangoooooo  QQ:1041271418",
+        "app_title": "GBFR Damage Font Mod Editor  v57   UP: bilibili / Dangoooooo  QQ:1041271418",
         "gen_mod": "▶ Build Mod",
         "ttf_tab": "Generate PNG from Font",
         "batch_replace": "Batch Replace Elements (by code 00-12)",
@@ -271,6 +281,7 @@ I18N = {
         "col_native": "Native (real ratio)",
         "col_action": "Action",
         "col_replace": "Replace Image",
+        "col_overlay": "Native Overlay / Tint",
         "all_keep": "All Keep",
         "all_block": "All Block",
         "all_replace": "All Replace",
@@ -328,7 +339,7 @@ I18N = {
         "sz_sec_float": "Float / Spread",
         "sz_range_alpha": "Spread factor alpha",
         "sz_range_alpha_hint": "1.0=native; larger=more spread, smaller=more compact; suggest 0.5~3.0",
-        "col_pick": "Pick %s color",
+        "col_pick": "Pick color",
         "ttf_heading": "Font Color / Style",
         "ttf_file": "File",
         "ttf_font": "Font File:",
@@ -369,7 +380,7 @@ I18N = {
         "br_scale_mode": "Scale %d%%",
         "br_none": "none",
         "about_title": "About",
-        "about_body": "GBFR Damage Font Mod Editor  v40\n\nEasily create GBFR damage number / symbol font mods.\nCols: Name | Coord | Native (real ratio) | Keep/Block/Replace | Import+Scale+Preview.\nCollapsible groups by suffix; Font (TTF/OTF) supports per-group color, bold, italic.\nBatch folder import; batch replace all groups by code.\nNew: Damage Size / Float / Teammate Color control (hud_param.json → damage_): ElemAdv Scale spArtsLinkAttackSize_ 0.3~2(0=off), Vertical height_(0=axis thru center) recommend -2~2, Horizontal length_(0=axis thru center) recommend -200~200, Spacing space_ recommend -40~40, Heal Spacing healSpace_ recommend -40~40, Show viewTime_ recommend 0.2s, Ally sizes commonSize_/criticalSize_ recommend 0.2~1, Player sizes playerSize_/playerCriticalSize_ recommend 0.3~1.2, teammate color normalAttackColor_/spAttackColor_ (RGBA 0-255), float alpha (multiplier on native values, 1.0=native, larger=more spread).\n\nRequires Reloaded-II + gbfrelink.utility.manager.",
+        "about_body": "GBFR Damage Font Mod Editor  v57\n\nEasily create GBFR damage number / symbol font mods.\nCols: Name | Coord | Native (real ratio) | Keep/Block/Replace | Import+Scale+Preview | Native Overlay/Tint.\nCollapsible groups by suffix; Font (TTF/OTF) supports per-group color, bold, italic.\nBatch folder import; batch replace all groups by code.\nNew: Damage Size / Float / Teammate Color control (hud_param.json → damage_): ElemAdv Scale spArtsLinkAttackSize_ 0.3~2(0=off), Vertical height_(0=axis thru center) recommend -2~2, Horizontal length_(0=axis thru center) recommend -200~200, Spacing space_ recommend -40~40, Heal Spacing healSpace_ recommend -40~40, Show viewTime_ recommend 0.2s, Ally sizes commonSize_/criticalSize_ recommend 0.2~1, Player sizes playerSize_/playerCriticalSize_ recommend 0.3~1.2, teammate color normalAttackColor_/spAttackColor_ (RGBA 0-255), float alpha (multiplier on native values, 1.0=native, larger=more spread).\n\nRequires Reloaded-II + gbfrelink.utility.manager。",
         "build_out_missing": "Error",
         "build_out_missing_msg": "Please set the output directory first",
         "confirm_title": "Confirm",
@@ -404,6 +415,15 @@ I18N = {
         "png_export_fail": "PNG export failed %s: %s",        "exp_pngs_done": "Exported %d native PNGs to:\n%s",
         "exp_done": "Exported:\n%s",
         "log_import_cfg": "Config imported: %s",
+        "overlay_all": "Overlay all native images to preview…",
+        "overlay_one": "Native Overlay…",
+        "overlay_tint": "Tint",
+        "overlay_alpha": "Opacity",
+        "overlay_tint_rgb": "R/G/B",
+        "overlay_tint_a": "A",
+        "overlay_tint_pick": "Palette",
+        "overlay_log": "Native overlay: %s <- native image (set as replace)",
+        "overlay_tint_log": "Native overlay & tint: %s <- RGBA(%d,%d,%d,%d)",
         "lang_toggle": "中文",
         "tutorial": "Tutorial",
     },
@@ -417,8 +437,9 @@ TUTORIAL_TEXT = {
 "一、界面速览\n"
 "· 顶部工具栏：生成 Mod ｜ 用字体生成png ｜ 批量替换 ｜ 数字大小控制 ｜ 教程 ｜ 语言切换(EN/中文)\n"
 "· 第二行：Mod 名称(可改) ＋ Mod 输出目录(默认 ./mod_output) ＋ 浏览\n"
-"· 表格五列：①元素名 ②坐标 ③原生图(真实比例) ④动作(保留/屏蔽/替换) ⑤替换图片(预览＋导入＋占比＋铺满)\n"
+"· 表格六列：①元素名 ②坐标 ③原生图(真实比例) ④动作(保留/屏蔽/替换) ⑤替换图片(预览＋导入＋占比＋铺满) ⑥原生覆盖/染色(按钮＋染色勾选＋单框RGBA＋独立不透明度)\n"
 "· ⑤列头还带：批量从文件夹导入... ＋ 占比 ＋ 铺满\n"
+"· ⑥列头带：『将原生图片全部覆盖到预览图…』按钮(一键把每个精灵原生图覆盖到替换预览，并把⑤列占比重置为100%)；每行有『原生覆盖…』按钮：点它会把该行原生图直接当作替换图(并切到替换、占比重置100%)；染色勾选框在⑤列预览图为空时灰色禁用，有图后才可勾选——勾选即按右侧色块(可直接点击选色)的 RGBA 实时染色，取消即复原；所有 RGB(A) 调色均改为一个输入框直接填『R,G,B』或『R,G,B,A』；每行另有独立不透明度输入框(0-255)，与 RGBA 框中的 A 值双向同步\n"
 "· 列头①②③下方各有『导出…』按钮(名单/坐标/原生PNG); 工具栏『将全列导出…』可一键导出整表 Excel\n"
 "· 表格按组别可折叠(底层附加/受伤/特效/烂肉质1/烂肉质2/回血/属性克制)，点组标题展开/收起\n"
 "· 底部：控制台(操作日志)\n"
@@ -470,8 +491,9 @@ TUTORIAL_TEXT = {
 "1. Interface overview\n"
 "· Top toolbar: Build Mod | Generate PNG from Font | Batch Replace | Number Size | Tutorial | Language toggle (中文/EN)\n"
 "· Second row: Mod Name (editable) + Mod Output Dir (default ./mod_output) + Browse\n"
-"· Table 5 columns: Name | Coord | Native (real ratio) | Action (Keep/Block/Replace) | Replace Image (preview + import + scale + stretch)\n"
+"· Table 6 columns: Name | Coord | Native (real ratio) | Action (Keep/Block/Replace) | Replace Image (preview + import + scale + stretch) | Native Overlay / Tint (button + Tint checkbox + single-box RGBA + separate Opacity)\n"
 "· Column header of Replace Image also has: Batch Import from Folder... + Scale + Stretch\n"
+"· Column header of Native Overlay has: 'Overlay all native images to preview…' button (one click overlays every sprite's native image as the replace preview, and resets column ⑤ scale to 100%); each row has a 'Native Overlay…' button that copies that row's native image as the replacement (switches to Replace, scale reset to 100%); the Tint checkbox is grayed/disabled while column ⑤ has no preview image, and enables once an image exists — checking it tints live with the RGBA from the swatch (click the swatch to pick a color), unchecking restores the original; all RGB(A) color pickers now use one box where you type 'R,G,B' or 'R,G,B,A'; each row also has a separate Opacity input (0-255), bi-directionally synced with the A value in the RGBA box\n"
 "· Under column headers ①②③ there is an 'Export…' button each (name list / coords / native PNGs); toolbar 'Export all cols…' exports the whole table to Excel\n"
 "· Table grouped & collapsible (Base Add / Damage / Effect / Flesh Weak 1 / Flesh Weak 2 / Heal / Element Counter); click group title to expand/collapse\n"
 "· Bottom: Console (log)\n"
@@ -586,7 +608,8 @@ class App:
     def __init__(self, root):
         self.root = root
         self.root.title(tr("app_title"))
-        self.root.geometry("1020x780")
+        self.root.geometry("1224x780")
+        self.root.resizable(True, True)
         self._i18n = []   # 语言切换时刷新的控件注册表: (widget, key, attr)
 
         self.native = core.load_native()
@@ -613,8 +636,9 @@ class App:
         self.photo_refs = []    # 防止 PhotoImage 被 GC
 
         self._build_toolbar()
+        self._build_canvas_skeleton()
         self._build_header()
-        self._build_table()
+        self._build_data_rows()
         self._build_console()
         self._bind_wheel()
 
@@ -657,36 +681,52 @@ class App:
         b5 = ttk.Button(sub, text=tr("browse"), command=self.on_browse_out)
         b5.pack(side="left", padx=2); self._reg(b5, "browse")
 
-    # ───────────────── 列头 ─────────────────
+    # ───────────────── 列头（在 self.table 内，与数据行共享 grid） ─────────────────
     def _build_header(self):
-        hdr = ttk.Frame(self.root)
-        hdr.pack(side="top", fill="x")
-        titles = [tr("col_name"), tr("col_coord"), tr("col_native"), tr("col_action"), tr("col_replace")]
-        cols = ["col_name", "col_coord", "col_native", "col_action", "col_replace"]
+        """表头作为 self.table 的第 0-1 行，与数据行完美对齐。"""
+        titles = [tr("col_name"), tr("col_coord"), tr("col_native"), tr("col_action"), tr("col_replace"), tr("col_overlay")]
+        cols = ["col_name", "col_coord", "col_native", "col_action", "col_replace", "col_overlay"]
         export_keys = {COL_NAME: "exp_col", COL_COORD: "exp_col", COL_NATIVE: "exp_col"}
-        # Use grid layout so columns align with the table below
-        for c in range(5):
-            hdr.grid_columnconfigure(c, minsize=COL_W[c], weight=(1 if c == COL_REPLACE else 0))
+        # 统一背景色（匹配 ttk 主题）
+        try:
+            hdr_bg = ttk.Style().lookup('TFrame', 'background') or '#f0f0f0'
+        except:
+            hdr_bg = '#f0f0f0'
+        self._cell_bg = hdr_bg
+
         h_row = 0
-        # Row 0: column title labels
-        for c in range(5):
-            lab = ttk.Label(hdr, text=titles[c], font=("Microsoft YaHei", 12, "bold"), anchor="center")
-            lab.grid(row=h_row, column=c, sticky="ew", padx=1, pady=1)
+        # Row 0: column title labels（带边框的 cell）
+        for c in range(6):
+            cell = tk.Frame(self.table, relief="solid", bd=1, bg=hdr_bg)
+            cell.grid(row=h_row, column=c, sticky="nsew", padx=0, pady=0)
+            lab = tk.Label(cell, text=titles[c], font=("Microsoft YaHei", 11, "bold"),
+                           anchor="center", bg=hdr_bg)
+            lab.pack(expand=True, fill="both", padx=4, pady=3)
             self._reg(lab, cols[c])
         h_row += 1
-        # Row 1: sub-controls under each column
-        for c in range(5):
+        # Row 1: sub-controls under each column（带边框）
+        for c in range(6):
+            cell = tk.Frame(self.table, relief="solid", bd=1, bg=hdr_bg)
+            cell.grid(row=h_row, column=c, sticky="nsew", padx=0, pady=0)
             if c == COL_ACTION:
-                f = ttk.Frame(hdr)
-                f.grid(row=h_row, column=c, sticky="ew", padx=1, pady=1)
-                self._bulk_action_frame(f)
+                self._bulk_action_frame(cell)
             elif c == COL_REPLACE:
-                f = ttk.Frame(hdr)
-                f.grid(row=h_row, column=c, sticky="ew", padx=1, pady=1)
-                self._batch_import_frame(f)
+                self._batch_import_frame(cell)
+            elif c == COL_OVERLAY:
+                # 居中按钮
+                cell.grid_rowconfigure(0, weight=1)
+                cell.grid_columnconfigure(0, weight=1)
+                inner = ttk.Frame(cell)
+                inner.grid(row=0, column=0)
+                ob = ttk.Button(inner, text=tr("overlay_all"),
+                                command=self.on_overlay_all)
+                ob.pack(); self._reg(ob, "overlay_all")
             elif c in export_keys:
-                eb = ttk.Button(hdr, text=tr("exp_col"), command=lambda cc=c: self.on_export_col(cc))
-                eb.grid(row=h_row, column=c, sticky="ew", padx=1, pady=(0, 2)); self._reg(eb, "exp_col")
+                eb = ttk.Button(cell, text=tr("exp_col"), command=lambda cc=c: self.on_export_col(cc))
+                eb.pack(expand=True, fill="both", padx=4, pady=2); self._reg(eb, "exp_col")
+
+        # 数据行从 row 2 开始
+        self._next_row = 2
 
     def _bulk_action_frame(self, f):
         container = ttk.Frame(f)
@@ -781,11 +821,11 @@ class App:
         res["link"] = (253, 201, 19)
         return res
 
-    # ───────────────── 表格 ─────────────────
-    def _build_table(self):
+    # ───────────────── Canvas 骨架（先创建，表头和数据行都往 self.table 里添加） ─────────────────
+    def _build_canvas_skeleton(self):
         wrap = ttk.Frame(self.root)
         wrap.pack(side="top", fill="both", expand=True)
-        self.canvas = tk.Canvas(wrap)
+        self.canvas = tk.Canvas(wrap, highlightthickness=0)
         vsb = ttk.Scrollbar(wrap, orient="vertical", command=self.canvas.yview)
         self.canvas.configure(yscrollcommand=vsb.set)
         self.canvas.pack(side="left", fill="both", expand=True)
@@ -794,11 +834,16 @@ class App:
         self.canvas.create_window((0, 0), window=self.table, anchor="nw")
         self.canvas.bind("<Button-1>", self._on_canvas_click)
         self.table.bind("<Configure>", lambda e: self._update_scrollregion())
-        for c in range(5):
-            self.table.grid_columnconfigure(c, minsize=COL_W[c])
-        self.table.grid_columnconfigure(4, weight=1)  # 末列拉伸填满宽度
-        self.group_states = {}
+        # 列宽配置（表头和数据行共享这套配置）
+        for c in range(6):
+            self.table.grid_columnconfigure(c, minsize=COL_W[c],
+                                            weight=(1 if c in (COL_REPLACE, COL_OVERLAY) else 0))
         self._next_row = 0
+
+    # ───────────────── 数据行（在表头之后） ─────────────────
+    def _build_data_rows(self):
+        # _next_row 已被 _build_header 设为 2
+        self.group_states = {}
         for g in self.groups:
             sps = [s for s in self.sprites if s["group"] == g]
             self._build_group_header(g, sps)
@@ -809,8 +854,8 @@ class App:
         row = self._next_row
         self._next_row += 1
         n_char = sum(1 for s in sps if s.get("char"))
-        f = tk.Frame(self.table, bg="#37506b", relief="raised", bd=1)
-        f.grid(row=row, column=0, columnspan=5, sticky="ew", padx=1, pady=2)
+        f = tk.Frame(self.table, bg="#37506b", relief="solid", bd=1)
+        f.grid(row=row, column=0, columnspan=6, sticky="ew", padx=0, pady=0)
         lbl = tk.Label(f, text="", bg="#37506b", fg="white",
                        font=("Microsoft YaHei", 10, "bold"), anchor="w",
                        padx=8, pady=4, cursor="hand2")
@@ -871,20 +916,29 @@ class App:
         # 运行态
         st = {
             "sp": sp, "name": sp["name"],
-            "action": "keep", "ratio": 100.0, "repl": None,
+            "action": "keep", "ratio": 100.0, "repl": None, "repl_base": None,
             "stretch": False,
             "native_photo": None, "preview_photo": None,
             "preview_label": None, "action_states": None,
+            "tint": False, "tint_rgba": [255, 80, 80, 255],
             "cells": [], "grid_row": row,
         }
         # 原生裁图 (HD)
         crop = self.hd_arr[sp["y"]:sp["y"] + sp["h"], sp["x"]:sp["x"] + sp["w"]]
         st["native_pil"] = Image.fromarray(crop).convert("RGBA")
 
-        for c in range(5):
-            cell = ttk.Frame(self.table, width=COL_W[c], height=104)
-            cell.grid(row=row, column=c, sticky="nsew", padx=1, pady=1)
-            cell.grid_propagate(False)
+        # 动态行高：基于缩略图显示高度（非原始像素！），保证第6列控件能完整显示
+        # to_thumb 按 NATIVE_MAX=(140,92) 等比缩放，这里用同样公式算显示高度
+        ROW_MIN = 130  # 覆盖 overlay 控件组(按钮+染色+调色+不透明度)所需最小高度
+        scale = min(NATIVE_MAX[0] / st["native_pil"].width, NATIVE_MAX[1] / st["native_pil"].height, 1.0)
+        thumb_h = int(st["native_pil"].height * scale)
+        row_h = max(ROW_MIN, thumb_h + 16)
+        nat_thumb = to_thumb(st["native_pil"], NATIVE_MAX)
+
+        for c in range(6):
+            cell = tk.Frame(self.table, relief="solid", bd=1,
+                            bg=getattr(self, '_cell_bg', '#f0f0f0'))
+            cell.grid(row=row, column=c, sticky="nsew", padx=0, pady=0)
             if c == COL_NAME:
                 ttk.Label(cell, text=sp["name"], font=("Consolas", 8),
                           wraplength=COL_W[c] - 6, justify="center", anchor="center").pack(expand=True)
@@ -901,6 +955,8 @@ class App:
                 self._action_cell(cell, st)
             elif c == COL_REPLACE:
                 self._replace_cell(cell, st)
+            elif c == COL_OVERLAY:
+                self._overlay_cell(cell, st)
             st["cells"].append(cell)
         self.rows.append(st)
         self.row_by_name[sp["name"]] = st
@@ -988,6 +1044,205 @@ class App:
             st["preview_label"].configure(image="", text=tr("after_replace"))
             st["preview_label"].image = None
 
+    def _overlay_cell(self, cell, st):
+        """⑥原生覆盖/染色: 按钮「原生覆盖…」 + 「染色」勾选 + 单框 RGBA 调色 + 独立不透明度。
+        居中方案：pack(expand=True) 不带 fill → 内容居中。"""
+        outer = ttk.Frame(cell)
+        outer.pack(expand=True)
+
+        btn = ttk.Button(outer, text=tr("overlay_one"), width=11,
+                         command=lambda s=st: self.on_overlay_one(s))
+        btn.pack(pady=(2, 4)); self._reg(btn, "overlay_one")
+
+        # 染色勾选 + 单框调色（色块可直接点击选色，无需额外调色板选项卡）
+        ctrl = ttk.Frame(outer)
+        ctrl.pack(fill="x", pady=(0, 2))
+        tint_var = tk.BooleanVar(value=st["tint"])
+        st["tint_var"] = tint_var
+        # 初始预览图(替换图)为空 → 灰色禁用；有图后由 _update_tint_enabled 启用
+        cb = ttk.Checkbutton(ctrl, text=tr("overlay_tint"), variable=tint_var,
+                             state="disabled")
+        cb.pack(side="left", padx=(0, 4)); self._reg(cb, "overlay_tint")
+        st["tint_check_btn"] = cb
+
+        def on_tint(*a):
+            st["tint"] = tint_var.get()
+            self._apply_tint(st)
+        tint_var.trace_add("write", on_tint)
+
+        def on_tint_color(r, g, b, a):
+            st["tint_rgba"] = [r, g, b, a]
+            alpha_var.set(str(a))  # 同步独立不透明度输入框
+            if st["tint"]:
+                self._apply_tint(st)
+        cf = self._build_color_field(ctrl, tuple(st["tint_rgba"]), has_alpha=True,
+                                     on_color=on_tint_color)
+        cf["frame"].pack(side="left")
+        st["tint_color_field"] = cf
+
+        # 独立不透明度输入框（每行单独控制染色/覆盖后的 Alpha 通道）
+        alpha_frame = ttk.Frame(outer)
+        alpha_frame.pack(fill="x", pady=(2, 0))
+        al_lbl = ttk.Label(alpha_frame, text=tr("overlay_alpha"))
+        al_lbl.pack(side="left", padx=(0, 4)); self._reg(al_lbl, "overlay_alpha")
+        alpha_var = tk.StringVar(value=str(st["tint_rgba"][3]))
+        st["alpha_var"] = alpha_var
+        al_ent = ttk.Entry(alpha_frame, width=6)
+        al_ent.insert(0, alpha_var.get())
+        al_ent.pack(side="left")
+
+        def on_alpha_change(*a):
+            try:
+                val = max(0, min(255, int(float(alpha_var.get()))))
+                st["tint_rgba"][3] = val
+                # 同步颜色字段中的 A 值显示
+                cf["set"](st["tint_rgba"][0], st["tint_rgba"][1], st["tint_rgba"][2], val)
+                if st["tint"]:
+                    self._apply_tint(st)
+            except (ValueError, TypeError):
+                pass
+        alpha_var.trace_add("write", on_alpha_change)
+        al_ent.bind("<Return>", lambda e: on_alpha_change())
+        al_ent.bind("<FocusOut>", lambda e: on_alpha_change())
+        st["alpha_entry"] = al_ent
+
+        # 初始：预览图为空 → 染色勾选禁用
+        self._update_tint_enabled(st)
+
+    def _build_color_field(self, parent, initial, has_alpha, on_color):
+        """单框 RGB(A) 调色字段: 可点击色块 + 一个输入框(输入 'R,G,B' 或 'R,G,B,A')。
+        initial: (r,g,b) 或 (r,g,b,a)；on_color(r,g,b,a): 颜色变化回调(色块或输入框)。
+        返回 {'frame','set','get'}。"""
+        r0, g0, b0 = initial[:3]
+        a0 = initial[3] if len(initial) > 3 else 255
+        frame = ttk.Frame(parent)
+        sw = tk.Button(frame, width=3, bg="#%02x%02x%02x" % (r0, g0, b0), relief="raised")
+        sw.pack(side="left", padx=(0, 3))
+        ent = ttk.Entry(frame, width=12)
+        ent.insert(0, ("%d,%d,%d" % (r0, g0, b0)) + (",%d" % a0 if has_alpha else ""))
+        ent.pack(side="left")
+        cur = {"r": r0, "g": g0, "b": b0, "a": a0}
+
+        def emit():
+            on_color(cur["r"], cur["g"], cur["b"], cur["a"])
+
+        def apply_entry(*a):
+            txt = ent.get().replace("，", ",").replace(" ", ",")
+            parts = [p for p in txt.split(",") if p.strip() != ""]
+            try:
+                nums = [max(0, min(255, int(float(p)))) for p in parts[:4]]
+            except (ValueError, TypeError):
+                return
+            if len(nums) < 3:
+                return
+            cur["r"], cur["g"], cur["b"] = nums[0], nums[1], nums[2]
+            if has_alpha and len(nums) >= 4:
+                cur["a"] = nums[3]
+            sw.configure(bg="#%02x%02x%02x" % (cur["r"], cur["g"], cur["b"]))
+            emit()
+
+        def on_pick():
+            c = colorchooser.askcolor(color="#%02x%02x%02x" % (cur["r"], cur["g"], cur["b"]),
+                                      title=tr("col_pick"))
+            if not c or c[1] is None:
+                return
+            r, g, b = [max(0, min(255, int(round(x)))) for x in c[0]]
+            cur["r"], cur["g"], cur["b"] = r, g, b
+            sw.configure(bg="#%02x%02x%02x" % (r, g, b))
+            ent.delete(0, "end")
+            ent.insert(0, ("%d,%d,%d" % (r, g, b)) + (",%d" % cur["a"] if has_alpha else ""))
+            emit()
+
+        sw.configure(command=on_pick)
+        ent.bind("<Return>", apply_entry)
+        ent.bind("<FocusOut>", apply_entry)
+
+        def set_color(r, g, b, a=255):
+            cur["r"], cur["g"], cur["b"] = r, g, b
+            cur["a"] = a if has_alpha else 255
+            sw.configure(bg="#%02x%02x%02x" % (r, g, b))
+            ent.delete(0, "end")
+            ent.insert(0, ("%d,%d,%d" % (r, g, b)) + (",%d" % cur["a"] if has_alpha else ""))
+
+        return {"frame": frame, "set": set_color,
+                "get": lambda: (cur["r"], cur["g"], cur["b"], cur["a"])}
+
+    def _apply_tint(self, st):
+        """按染色勾选状态刷新 st['repl'] 与预览：勾选→染原生色，取消→复原为原始替换图。"""
+        base = st.get("repl_base")
+        if base is None:
+            return
+        if st["tint"]:
+            st["repl"] = self._tint_image(base, st["tint_rgba"])
+        else:
+            st["repl"] = base
+        self._refresh_preview(st)
+
+    def _update_tint_enabled(self, st):
+        """预览图(替换图)为空时禁用染色勾选；有图时启用。"""
+        has = st.get("repl_base") is not None
+        btn = st.get("tint_check_btn")
+        if btn:
+            btn.configure(state="normal" if has else "disabled")
+        if not has and st.get("tint_var"):
+            st["tint_var"].set(False)
+            st["tint"] = False
+
+    def _tint_image(self, base_pil, rgba):
+        """给任意 RGBA 图按亮度保留式染色(类似 WPS/PPT 着色): 纯黑保持黑，亮部变目标色。"""
+        rgba = [max(0, min(255, int(round(x)))) for x in rgba]
+        tr, tg, tb, ta = rgba
+        arr = np.array(base_pil, dtype=np.float64)
+
+        # ITU-R BT.601 亮度
+        lum = 0.299 * arr[:, :, 0] + 0.587 * arr[:, :, 1] + 0.114 * arr[:, :, 2]
+        # 归一化亮度作为目标色的混合系数
+        lum_norm = np.clip(lum / 255.0, 0, 1)
+
+        out = np.zeros_like(arr)
+        out[:, :, 0] = tr * lum_norm
+        out[:, :, 1] = tg * lum_norm
+        out[:, :, 2] = tb * lum_norm
+        # Alpha: 原生 alpha × 调色板 alpha 系数
+        out[:, :, 3] = np.clip(arr[:, :, 3] * (ta / 255.0), 0, 255)
+
+        return Image.fromarray(np.clip(out, 0, 255).astype(np.uint8), "RGBA")
+
+    def on_overlay_one(self, st):
+        # 用原生图覆盖到替换预览 (⑤列)，并恢复占比为 100%
+        st["repl_base"] = st["native_pil"].copy()
+        st["action"] = "replace"
+        for k in st["action_states"]:
+            st["action_states"][k].set(k == "replace")
+        if st.get("ratio_var"):
+            st["ratio_var"].set(100)
+        st["ratio"] = 100.0
+        self._update_tint_enabled(st)   # 现在有了预览图 → 启用染色勾选
+        self._apply_tint(st)            # 按勾选状态决定染不染
+        if st["tint"]:
+            self.log(tr("overlay_tint_log") % ((st["name"],) + tuple(st["tint_rgba"])))
+        else:
+            self.log(tr("overlay_log") % st["name"])
+
+    def on_overlay_all(self):
+        n = 0
+        for st in self.rows:
+            st["repl_base"] = st["native_pil"].copy()
+            st["action"] = "replace"
+            if st["action_states"]:
+                for k in st["action_states"]:
+                    st["action_states"][k].set(k == "replace")
+            if st.get("ratio_var"):
+                st["ratio_var"].set(100)
+            st["ratio"] = 100.0
+            self._update_tint_enabled(st)
+            self._apply_tint(st)
+            n += 1
+        if self.rows and self.rows[0]["tint"]:
+            self.log(tr("overlay_tint_log") % (("ALL",) + tuple(self.rows[0]["tint_rgba"])))
+        else:
+            self.log("原生覆盖全部: 已设为替换 (%d 处)" % n)
+
     # ───────────────── 控制台 ─────────────────
     def _build_console(self):
         f = ttk.Frame(self.root)
@@ -1067,12 +1322,13 @@ class App:
         except Exception as e:
             messagebox.showerror(tr("import_fail_title"), str(e))
             return
-        st["repl"] = img
+        st["repl_base"] = img
         # 自动切到替换
         st["action"] = "replace"
         for k in st["action_states"]:
             st["action_states"][k].set(k == "replace")
-        self._refresh_preview(st)
+        self._update_tint_enabled(st)
+        self._apply_tint(st)   # 设置 st['repl'] 并刷新预览(勾选染色则染)
         self.log(tr("log_import") % (st["name"], os.path.basename(p)))
 
     def on_batch_import(self):
@@ -1102,7 +1358,7 @@ class App:
                 img = Image.open(os.path.join(d, fn)).convert("RGBA")
             except Exception:
                 continue
-            st["repl"] = img
+            st["repl_base"] = img
             st["action"] = "replace"
             st["ratio"] = ratio
             st["ratio_var"].set(ratio)
@@ -1113,7 +1369,8 @@ class App:
             if st["action_states"]:
                 for k in st["action_states"]:
                     st["action_states"][k].set(k == "replace")
-            self._refresh_preview(st)
+            self._update_tint_enabled(st)
+            self._apply_tint(st)   # 设置 st['repl'] 并刷新预览
             n += 1
         self.log(tr("log_batch") % (n, ratio))
         if skipped_effect:
@@ -1217,6 +1474,7 @@ class App:
                         if st["sp"]["group"] == "effect":
                             continue
                         if self._sprite_code(st["name"]) == code:
+                            st["repl_base"] = img_ref[0].copy()
                             st["repl"] = img_ref[0].copy()
                             st["action"] = "replace"
                             st["ratio"] = float(ratio_val)
@@ -1226,7 +1484,8 @@ class App:
                                 st["stretch_var"].set(stretch_val)
                             for k in st["action_states"]:
                                 st["action_states"][k].set(k == "replace")
-                            self._refresh_preview(st)
+                            self._update_tint_enabled(st)
+                            self._apply_tint(st)   # 同步染色基准 + 按勾选染/复原并刷新预览
                             applied += 1
                     mode_str = tr("stretch_lbl") if stretch_val else (tr("br_scale_mode") % ratio_val)
                     self.log(tr("br_cover_log") % (code, mode_str, applied))
@@ -1330,28 +1589,13 @@ class App:
             rowf.pack(fill="x", padx=8, pady=4)
             ttk.Label(rowf, text=tr(COLOR_LABEL_KEYS[k]),
                       font=("Microsoft YaHei", 10, "bold")).pack(side="left", padx=(0, 8))
-            sw = tk.Button(rowf, width=3, bg="#%02x%02x%02x" % col[:3], relief="raised")
-            rgb_frame = ttk.Frame(rowf)
-            rgb_vars = []
-            rgb_entries = []
-            for idx2, ch in enumerate(["R", "G", "B", "A"]):
-                ttk.Label(rgb_frame, text=ch, font=("Consolas", 8, "bold"),
-                          foreground="#666").pack(side="left")
-                v = tk.StringVar(value=str(col[idx2]))
-                e = ttk.Entry(rgb_frame, textvariable=v, width=4)
-                e.pack(side="left", padx=1)
-                rgb_vars.append(v)
-                rgb_entries.append(e)
-            sw.configure(command=self._make_dmg_color_setter(k, sw, rgb_entries))
-            rgb_apply = self._make_dmg_color_rgba(k, sw, rgb_entries)
-            for e in rgb_entries:
-                e.bind("<Return>", lambda ev, fn=rgb_apply: fn())
-                e.bind("<FocusOut>", lambda ev, fn=rgb_apply: fn())
-            sw.pack(side="left", padx=3)
-            rgb_frame.pack(side="left", padx=(0, 6))
+            def on_dmg(r, g, b, a, kk=k):
+                self.dmg_colors[kk] = (r, g, b, a)
+            cf = self._build_color_field(rowf, col, has_alpha=True, on_color=on_dmg)
+            cf["frame"].pack(side="left", padx=(0, 6))
             ttk.Label(rowf, text=tr(COLOR_HINT_KEYS[k]),
                       font=("Microsoft YaHei", 8), foreground="#888").pack(side="left", padx=(6, 0))
-            self._dmg_color_widgets[k] = {"btn": sw, "rgb_vars": rgb_vars}
+            self._dmg_color_widgets[k] = {"field": cf}
         bottom = ttk.Frame(_p)
         bottom.pack(fill="x", padx=16, pady=(8, 10))
         ttk.Label(bottom, text=tr("sz_note"),
@@ -1367,7 +1611,7 @@ class App:
         def cb():
             cur = tuple(self.dmg_colors.get(k, DEFAULT_COLOR[k]))
             c = colorchooser.askcolor(color="#%02x%02x%02x" % cur[:3],
-                                      title=tr("col_pick") % k)
+                                      title=tr("col_pick"))
             if c[1] is None:
                 return
             r, g_, b = (int(x) for x in c[0])
@@ -1435,10 +1679,8 @@ class App:
             col = DEFAULT_COLOR.get(k, (255, 255, 255, 255))
             self.dmg_colors[k] = tuple(col)
             gw = self._dmg_color_widgets.get(k)
-            if gw:
-                gw["btn"].configure(bg="#%02x%02x%02x" % col[:3])
-                for idx2, val in enumerate(col):
-                    gw["rgb_vars"][idx2].set(str(val))
+            if gw and gw.get("field"):
+                gw["field"]["set"](*col)   # 单框回写 RGBA
 
         # reset range alpha to native (1.0)
         self.dmg_range_alpha = DEFAULT_RANGE_ALPHA
@@ -1499,60 +1741,15 @@ class App:
             ttk.Label(rowf, text=self._group_label(g) + (tr("ttf_items") % n),
                       font=("Microsoft YaHei", 9, "bold")).pack(side="left")
 
-            # 颜色色块
+            # 颜色: 单框 RGB 调色(色块可点击选色, 不用额外选项卡)
             col = self.group_colors[g]
-            sw = tk.Button(rowf, width=3, bg="#%02x%02x%02x" % col, relief="raised")
 
-            gw = {"color_btn": sw}
+            def on_grp_color(r, g_, b, a, gg=g):
+                self.group_colors[gg] = (r, g_, b)
+            cf = self._build_color_field(rowf, col, has_alpha=False, on_color=on_grp_color)
+            cf["frame"].pack(side="left", padx=(0, 6))
+            gw = {"color_field": cf}
             self._dlg_group_widgets[g] = gw
-
-            def make_color_setter(gg, btn, r_ent, g_ent, b_ent):
-                def cb():
-                    c = colorchooser.askcolor(color="#%02x%02x%02x" % self.group_colors[gg],
-                                              title=tr("ttf_pick_color") % gg)
-                    if c[1] is None:
-                        return
-                    r, g_, b = (int(x) for x in c[0])
-                    self.group_colors[gg] = (r, g_, b)
-                    btn.configure(bg="#%02x%02x%02x" % (r, g_, b))
-                    r_ent.delete(0, "end"); r_ent.insert(0, str(r))
-                    g_ent.delete(0, "end"); g_ent.insert(0, str(g_))
-                    b_ent.delete(0, "end"); b_ent.insert(0, str(b))
-                return cb
-
-            def make_rgb_updater(gg, btn, r_ent, g_ent, b_ent):
-                # read RGB entries and update color swatch
-                def apply():
-                    try:
-                        r = max(0, min(255, int(float(r_ent.get()))))
-                        g_ = max(0, min(255, int(float(g_ent.get()))))
-                        b = max(0, min(255, int(float(b_ent.get()))))
-                    except (ValueError, TypeError):
-                        return
-                    self.group_colors[gg] = (r, g_, b)
-                    btn.configure(bg="#%02x%02x%02x" % (r, g_, b))
-                return apply
-
-            # RGB 可编辑输入框
-            rgb_frame = ttk.Frame(rowf); rgb_frame.pack(side="left", padx=2)
-            gw["rgb_vars"] = []
-            rgb_entries = []
-            for idx, ch in enumerate(["R", "G", "B"]):
-                ttk.Label(rgb_frame, text=ch, font=("Consolas", 8, "bold"),
-                         foreground="#666").pack(side="left")
-                v = tk.StringVar(value=str(col[idx]))
-                gw["rgb_vars"].append(v)
-                e = ttk.Entry(rgb_frame, textvariable=v, width=4)
-                e.pack(side="left", padx=1)
-                rgb_entries.append(e)
-
-            sw.configure(command=make_color_setter(g, sw, rgb_entries[0], rgb_entries[1], rgb_entries[2]))
-            rgb_apply = make_rgb_updater(g, sw, rgb_entries[0], rgb_entries[1], rgb_entries[2])
-            for e in rgb_entries:
-                e.bind("<Return>", lambda ev, fn=rgb_apply: fn())
-                e.bind("<FocusOut>", lambda ev, fn=rgb_apply: fn())
-            sw.pack(side="left", padx=3)
-            rgb_frame.pack(side="left", padx=(0, 6))
 
             # 不透明度
             opa_frame = ttk.Frame(rowf); opa_frame.pack(side="left", padx=2)
@@ -1592,53 +1789,12 @@ class App:
                 ttk.Label(rowf, text=self._group_label(g) + (tr("ttf_items") % n),
                           font=("Microsoft YaHei", 9, "bold")).pack(side="left")
                 col = self.group_colors[g]
-                sw = tk.Button(rowf, width=3, bg="#%02x%02x%02x" % col, relief="raised")
-                gw = {"color_btn": sw}
+                def _on_grp_color(r, g_, b, a, gg=g):
+                    self.group_colors[gg] = (r, g_, b)
+                _cf = self._build_color_field(rowf, col, has_alpha=False, on_color=_on_grp_color)
+                _cf["frame"].pack(side="left", padx=(0, 6))
+                gw = {"color_field": _cf}
                 self._dlg_group_widgets[g] = gw
-
-                def _make_cs(gg, btn, r_e, g_e, b_e):
-                    def cb():
-                        c = colorchooser.askcolor(color="#%02x%02x%02x" % self.group_colors[gg],
-                                                  title=tr("ttf_pick_color") % gg)
-                        if c[1] is None:
-                            return
-                        r, g_, b = (int(x) for x in c[0])
-                        self.group_colors[gg] = (r, g_, b)
-                        btn.configure(bg="#%02x%02x%02x" % (r, g_, b))
-                        r_e.delete(0, "end"); r_e.insert(0, str(r))
-                        g_e.delete(0, "end"); g_e.insert(0, str(g_))
-                        b_e.delete(0, "end"); b_e.insert(0, str(b))
-                    return cb
-
-                def _make_rgb_apply(gg, btn, r_e, g_e, b_e):
-                    def fn():
-                        try:
-                            r = max(0, min(255, int(float(r_e.get()))))
-                            g_ = max(0, min(255, int(float(g_e.get()))))
-                            b = max(0, min(255, int(float(b_e.get()))))
-                        except (ValueError, TypeError):
-                            return
-                        self.group_colors[gg] = (r, g_, b)
-                        btn.configure(bg="#%02x%02x%02x" % (r, g_, b))
-                    return fn
-
-                rgb_frame = ttk.Frame(rowf); rgb_frame.pack(side="left", padx=2)
-                gw["rgb_vars"] = []
-                _rgb_entries = []
-                for idx, ch in enumerate(["R", "G", "B"]):
-                    ttk.Label(rgb_frame, text=ch, font=("Consolas", 8, "bold"),
-                             foreground="#666").pack(side="left")
-                    v = tk.StringVar(value=str(col[idx]))
-                    gw["rgb_vars"].append(v)
-                    e = ttk.Entry(rgb_frame, textvariable=v, width=4)
-                    e.pack(side="left", padx=1)
-                    _rgb_entries.append(e)
-
-                sw.configure(_make_cs(g, sw, _rgb_entries[0], _rgb_entries[1], _rgb_entries[2]))
-                _apply_fn = _make_rgb_apply(g, sw, _rgb_entries[0], _rgb_entries[1], _rgb_entries[2])
-                for e in _rgb_entries:
-                    e.bind("<Return>", lambda ev, fn=_apply_fn: fn())
-                    e.bind("<FocusOut>", lambda ev, fn=_apply_fn: fn())
 
                 opa_frame = ttk.Frame(rowf); opa_frame.pack(side="left", padx=2)
                 ttk.Label(opa_frame, text=tr("ttf_opacity"), font=("Microsoft YaHei", 8)).pack(side="left")
@@ -1663,14 +1819,11 @@ class App:
                     continue
                 self.group_styles[g]["bold"] = gw["bold_var"].get()
                 self.group_styles[g]["italic"] = gw["italic_var"].get()
-                # 从 RGB 输入框读取颜色值
-                try:
-                    r = max(0, min(255, int(float(gw["rgb_vars"][0].get()))))
-                    g_ = max(0, min(255, int(float(gw["rgb_vars"][1].get()))))
-                    b = max(0, min(255, int(float(gw["rgb_vars"][2].get()))))
+                # 从单框 RGB 调色字段读取颜色值
+                cf = gw.get("color_field")
+                if cf:
+                    r, g_, b, _a = cf["get"]()
                     self.group_colors[g] = (r, g_, b)
-                except (ValueError, TypeError, KeyError):
-                    pass
                 try:
                     opa = int(float(gw["opacity_var"].get()))
                     self.group_opacities[g] = max(0, min(255, opa))
@@ -1735,7 +1888,9 @@ class App:
                 p = os.path.join(out_dir, sp["name"] + ".png")
                 if os.path.exists(p):
                     st = self.row_by_name[sp["name"]]
-                    st["repl"] = Image.open(p).convert("RGBA")
+                    img = Image.open(p).convert("RGBA")
+                    st["repl_base"] = img.copy()
+                    st["repl"] = img
                     st["action"] = "replace"
                     st["ratio_var"].set(100)
                     st["ratio"] = 100.0
@@ -1744,7 +1899,9 @@ class App:
                         st["stretch_var"].set(False)
                     for k in st["action_states"]:
                         st["action_states"][k].set(k == "replace")
-                    self.root.after(0, lambda s=st: self._refresh_preview(s))
+                    # 子线程改 dict 安全；UI 操作必须 after(0)
+                    self.root.after(0, lambda s=st: self._update_tint_enabled(s))
+                    self.root.after(0, lambda s=st: self._apply_tint(s))
             self.log(tr("ttf_done_log") % n)
             self.root.after(0, lambda: messagebox.showinfo(
                 tr("ttf_done_title"), tr("ttf_done_msg") % (n, out_dir)))
